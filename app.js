@@ -11,7 +11,7 @@ const waUrl = t => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t
 const wa = t => window.open(waUrl(t), "_blank", "noopener");
 const find = id => PRODUCTS.find(p => p.id === id);
 const DISP = { consultar:"Consulta la disponibilidad", disponible:"Disponible", agotado:"Agotado" };
-const imgOf = p => p.img || `assets/images/${p.cat}.svg`;
+const imgOf = p => p.img || ART.product(p);
 const go = sel => $(sel).scrollIntoView({ behavior:"smooth" });
 let toastT;
 const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2200); };
@@ -114,6 +114,7 @@ function fillConfig() {
 
 function init() {
   fillConfig();
+  $("#heroImg").src = ART.hero();
   setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
   $("#theme").onclick = () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
   $("#burger").onclick = () => { const on = $("#nav").classList.toggle("on"); $("#burger").setAttribute("aria-expanded", on); };
@@ -135,7 +136,7 @@ function init() {
 
   Object.entries(CATEGORIAS).forEach(([k, v]) => $("#fCat").add(new Option(v, k)));
   [...new Set(PRODUCTS.map(p => p.brand))].sort().forEach(b => $("#fBrand").add(new Option(b, b)));
-  $("#cats").innerHTML = Object.entries(CATEGORIAS).map(([k, v]) => `<button class="cat" data-cat="${k}" aria-pressed="false"><img src="assets/images/${k}.svg" alt="" width="400" height="300" loading="lazy"><span>${esc(v)}</span></button>`).join("");
+  $("#cats").innerHTML = Object.entries(CATEGORIAS).map(([k, v]) => `<button class="cat" data-cat="${k}" aria-pressed="false"><img src="${ART.cat(k)}" alt="" width="400" height="300" loading="lazy"><span>${esc(v)}</span></button>`).join("");
   $("#chipM").innerHTML = Object.keys(motos).sort().map(b => `<span>${esc(b)}</span>`).join("");
   $("#chipR").innerHTML = [...new Set(PRODUCTS.map(p => p.brand).filter(b => b !== "Genérico"))].sort().map(b => `<span>${esc(b)}</span>`).join("");
 
@@ -184,7 +185,7 @@ function init() {
   const topBtn = $("#top");
   addEventListener("scroll", () => { topBtn.hidden = scrollY < 700; }, { passive:true });
   topBtn.onclick = () => scrollTo({ top:0, behavior:"smooth" });
-  addEventListener("error", e => { const i = e.target; if (i && i.tagName === "IMG" && !i.dataset.f) { i.dataset.f = 1; i.src = "assets/images/placeholder.svg"; } }, true);
+  addEventListener("error", e => { const i = e.target; if (i && i.tagName === "IMG" && !i.dataset.f) { i.dataset.f = 1; i.src = ART.cat("motor"); } }, true);
 }
 
 try { init(); }

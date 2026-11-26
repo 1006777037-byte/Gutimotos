@@ -3,20 +3,21 @@
 Tienda virtual estática de repuestos para motos. HTML, CSS y JavaScript puros, sin servidor. El pedido se cierra por WhatsApp.
 
 ```
-index.html          Página principal
-404.html            Página de error personalizada
-css/styles.css      Estilos (claro y oscuro)
-js/config.js        Datos del negocio (WhatsApp, dirección, horarios, redes, políticas)
-js/products.js      Catálogo y compatibilidad
-js/app.js           Lógica: filtros, carrito, WhatsApp, formulario
-assets/             Imágenes e íconos
+index.html   Página principal
+404.html     Página de error
+styles.css    Estilos
+config.js     Datos del negocio (WhatsApp, dirección, horarios, redes, políticas)
+products.js   Catálogo y compatibilidad
+app.js        Lógica: filtros, carrito, WhatsApp, formulario
 ```
+
+Todos los archivos van en la **raíz** del repositorio (sin carpetas).
 
 ## Qué debes reemplazar (datos de ejemplo)
 1. **`js/config.js`**: número de WhatsApp (`573000000000`), teléfono, dirección, correo, horarios, redes, envío gratis y textos de garantía y envíos.
 2. **`js/products.js`**: todos los productos, precios, marcas, compatibilidad y disponibilidad son de demostración. Verifícalos antes de publicar. Si no estás seguro de una compatibilidad, bórrala de `fits`.
 3. **`index.html`**: las opiniones de clientes (busca el comentario «OPINIONES DE EJEMPLO»).
-4. **Imágenes**: `assets/images/` trae ilustraciones. Para usar fotos reales, guárdalas en `assets/images/` y agrega `img:"assets/images/mi-foto.jpg"` al producto. Cambia `hero.svg` por una foto de tu local o de una moto.
+4. **Imágenes**: las ilustraciones se generan en el código. Para usar fotos reales, sube la foto a la raíz del repositorio y agrega `img:"mi-foto.jpg"` al producto en `products.js`.
 5. Para que se vea bien al compartir el enlace, agrega en `<head>` una etiqueta `og:image` con la URL completa de una imagen JPG.
 
 ## Cómo publicarlo en GitHub Pages
