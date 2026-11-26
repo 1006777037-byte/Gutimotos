@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GutiMotos | Repuestos y accesorios para motos</title>
+<meta name="description" content="GutiMotos: repuestos y accesorios para motos, buscador por marca, modelo y año, taller y pedidos por WhatsApp.">
+<meta name="theme-color" content="#111317">
+<meta property="og:title" content="GutiMotos | Repuestos y accesorios para motos">
+<meta property="og:description" content="Encuentra el repuesto para tu moto y pide por WhatsApp.">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CO">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("gm-theme"))||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="top"><div class="wrap"><span>Envíos a todo el país</span><span><span data-cfg="horario"></span> | WhatsApp <span data-cfg="telefonoVisible"></span></span></div></div>
+<header class="nav"><div class="wrap">
+<a class="logo" href="#inicio" aria-label="GutiMotos, inicio">Guti<b>Motos</b></a>
+<nav id="nav" aria-label="Principal"><a href="#buscador">Buscar por moto</a><a href="#catalogo">Catálogo</a><a href="#ofertas">Ofertas</a><a href="#taller">Taller</a><a href="#politicas">Garantía y envíos</a><a href="#contacto">Contacto</a></nav>
+<button class="ic" id="theme" aria-pressed="false" aria-label="Cambiar entre modo claro y oscuro">☾</button>
+<button class="btn cartbtn" id="openCart" aria-label="Abrir carrito">Carrito <span id="cartN">0</span></button>
+<button class="ic burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">☰</button>
+</div></header>
+
+<main id="inicio">
+<section class="hero"><div class="wrap">
+<div><p class="kicker">Repuestos, accesorios y taller</p><h1>Tu moto, siempre <b>lista para rodar</b></h1>
+<p>Encuentra la pieza correcta por marca, modelo y año. Arma tu pedido y ciérralo con un asesor por WhatsApp.</p>
+<div class="cta"><a class="btn" href="#catalogo">Ver catálogo</a><a class="btn alt" href="#buscador">Buscar por mi moto</a><button class="btn alt" data-ask>Hablar con un asesor</button></div></div>
+<img src="assets/images/hero.svg" alt="Ilustración de una motocicleta deportiva" width="480" height="320">
+</div></section>
+
+<section id="buscador" class="finder-s"><div class="wrap"><form class="finder" id="finder" novalidate>
+<h2>Encuentra el repuesto para tu moto</h2>
+<div class="fgrid">
+<div><label for="fMarca">Marca</label><select id="fMarca"><option value="">Elige la marca</option></select></div>
+<div><label for="fModelo">Modelo</label><select id="fModelo"><option value="">Todos los modelos</option></select></div>
+<div><label for="fAnio">Año</label><select id="fAnio"><option value="">Cualquier año</option></select></div>
+<button class="btn" type="submit">Ver repuestos compatibles</button></div>
+<p class="note">La compatibilidad es de referencia. Si no aparece tu moto o dudas, te ayudamos por WhatsApp antes de comprar.</p>
+</form></div></section>
+
+<section><div class="wrap"><h2>Categorías</h2><p class="lead">Del mantenimiento diario al equipo de seguridad.</p><div class="cats" id="cats"></div></div></section>
+
+<section id="destacados" style="padding-top:0"><div class="wrap"><h2>Productos destacados</h2><p class="lead">Los repuestos que más preguntan nuestros clientes.</p><div class="grid" id="gridFeat"></div></div></section>
+
+<section id="ofertas" class="dk"><div class="wrap"><h2>Ofertas</h2><p class="lead">Precios rebajados por tiempo limitado. Confirma disponibilidad antes de pagar.</p><div class="grid" id="gridOff"></div></div></section>
+
+<section id="catalogo"><div class="wrap"><h2>Catálogo completo</h2><p class="lead">Busca por nombre, marca o referencia, o filtra por categoría y precio.</p>
+<div class="tools">
+<div class="q"><label for="q">Buscar</label><input id="q" type="search" placeholder="Pastillas, cadena, casco…" autocomplete="off"></div>
+<div><label for="fCat">Categoría</label><select id="fCat"><option value="">Todas</option></select></div>
+<div><label for="fBrand">Marca del repuesto</label><select id="fBrand"><option value="">Todas</option></select></div>
+<div><label for="fPrice">Precio</label><select id="fPrice"><option value="0">Sin límite</option><option value="50000">Hasta $50.000</option><option value="100000">Hasta $100.000</option><option value="200000">Hasta $200.000</option></select></div>
+<div><label for="fSort">Ordenar</label><select id="fSort"><option value="">Relevancia</option><option value="a">Menor precio</option><option value="d">Mayor precio</option></select></div>
+<button class="btn alt" id="reset" type="button">Limpiar</button></div>
+<div class="bar" id="motoBar" hidden><span>Repuestos para <strong id="motoTxt"></strong></span><span><button class="lnk" id="motoClear" type="button">Quitar moto</button></span></div>
+<p class="note" id="resN" role="status" aria-live="polite" style="margin:0 0 14px"></p>
+<div class="grid" id="grid"><div class="empty">Cargando catálogo…</div></div></div></section>
+
+<section id="recientes" hidden style="padding-top:0"><div class="wrap"><h2>Vistos recientemente</h2><p class="lead">Para que retomes donde te quedaste.</p><div class="grid" id="gridRec"></div></div></section>
+
+<section id="marcas" class="dk"><div class="wrap two"><div><h2>Marcas</h2><p class="lead">Motos que atendemos y fabricantes de repuestos del catálogo.</p></div>
+<div><h3>Motocicletas</h3><div class="chips" id="chipM" style="margin:10px 0 22px"></div><h3>Repuestos</h3><div class="chips" id="chipR" style="margin-top:10px"></div></div></div></section>
+
+<section><div class="wrap"><h2>Por qué comprar en GutiMotos</h2><p class="lead">Compra con acompañamiento de principio a fin.</p>
+<div class="ben"><div><h3>Asesoría por WhatsApp</h3><p>Te ayudamos a confirmar la pieza antes de pagar.</p></div><div><h3>Garantía</h3><p>Repuestos nuevos con garantía por defectos de fábrica.</p></div><div><h3>Envíos nacionales</h3><p>Despachamos por transportadora a donde estés.</p></div><div><h3>Instalación en taller</h3><p>Compras la pieza y te la instalamos.</p></div></div></div></section>
+
+<section id="taller" class="dk"><div class="wrap"><h2>Taller</h2><p class="lead">Mecánica y mantenimiento. Pregunta por el valor según tu moto.</p>
+<div class="svc"><div><h3>Cambio de aceite y filtro</h3><p>Nivel, filtro y revisión de fugas.</p></div><div><h3>Frenos</h3><p>Pastillas, bandas, líquido y purga.</p></div><div><h3>Kit de arrastre</h3><p>Cadena, piñón y catalina, alineados.</p></div><div><h3>Sistema eléctrico</h3><p>Batería, regulador, luces y arranque.</p></div></div>
+<button class="btn" id="taller-btn" data-taller>Agendar con el taller</button></div></section>
+
+<!-- OPINIONES DE EJEMPLO: reemplázalas por testimonios reales de tus clientes -->
+<section><div class="wrap"><h2>Opiniones de clientes</h2><p class="lead">Lo que cuentan quienes ya compraron.</p>
+<div class="quotes"><blockquote>“Me ayudaron a confirmar la pieza por WhatsApp y llegó bien empacada.”<footer>Cliente de ejemplo 1</footer></blockquote>
+<blockquote>“Compré las pastillas y las instalaron el mismo día en el taller.”<footer>Cliente de ejemplo 2</footer></blockquote>
+<blockquote>“Me explicaron cuál casco servía y por qué. Muy claro todo.”<footer>Cliente de ejemplo 3</footer></blockquote></div></div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap two"><div><h2>Preguntas frecuentes</h2></div><div>
+<details><summary>¿Cómo sé si el repuesto sirve para mi moto?</summary><p>Usa el buscador por marca, modelo y año. La compatibilidad es de referencia: antes de pagar, un asesor la confirma contigo por WhatsApp.</p></details>
+<details><summary>¿Cómo hago el pedido?</summary><p>Agrega los productos al carrito y toca «Pedir por WhatsApp». Se abre un mensaje con tu pedido listo para enviar.</p></details>
+<details><summary>¿Hay productos disponibles ahora?</summary><p>La disponibilidad se confirma en cada pedido. Escríbenos y te respondemos con el stock real.</p></details>
+<details><summary>¿Puedo pagar en línea?</summary><p>Todavía no. El pago y el envío se coordinan con el asesor al confirmar tu pedido.</p></details></div></div></section>
+
+<section id="politicas" class="dk"><div class="wrap two pol"><div><h2>Garantía</h2><p data-cfg="politicaGarantia"></p></div><div><h2>Envíos</h2><p data-cfg="politicaEnvios"></p></div></div></section>
+
+<section id="contacto"><div class="wrap two"><div class="info"><h2>Contacto</h2><p class="lead">Cotiza, consulta un repuesto o agenda el taller.</p>
+<p><b>Dirección</b><span data-cfg="direccion"></span></p><p><b>WhatsApp</b><span data-cfg="telefonoVisible"></span></p><p><b>Correo</b><a data-mail href="#"><span data-cfg="correo"></span></a></p><p><b>Horario</b><span data-cfg="horario"></span></p></div>
+<form id="cf" novalidate>
+<label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" aria-describedby="e-nombre"><span class="err" id="e-nombre"></span>
+<label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="e-tel"><span class="err" id="e-tel"></span>
+<label for="tipo">¿Qué necesitas?</label><select id="tipo" name="tipo"><option>Consultar un repuesto</option><option>Solicitar cotización</option><option>Agendar taller</option><option>Otro</option></select>
+<label for="moto" style="margin-top:12px">Moto y año (opcional)</label><input id="moto" name="moto" placeholder="Ej: Honda CB 190R 2021">
+<label for="msg" style="margin-top:12px">Mensaje</label><textarea id="msg" name="msg" rows="4" aria-describedby="e-msg"></textarea><span class="err" id="e-msg"></span>
+<button class="btn" type="submit">Enviar por WhatsApp</button></form></div></section>
+</main>
+
+<footer class="ft"><div class="wrap">
+<div><div class="logo">Guti<b>Motos</b></div><p style="opacity:.75;max-width:36ch">Repuestos, accesorios y taller para tu moto.</p></div>
+<div><h3>Tienda</h3><a href="#catalogo">Catálogo</a><a href="#ofertas">Ofertas</a><a href="#buscador">Buscar por moto</a></div>
+<div><h3>Ayuda</h3><a href="#faq">Preguntas</a><a href="#politicas">Garantía y envíos</a><a href="#contacto">Contacto</a></div>
+<div><h3>Síguenos</h3><a data-social="instagram" href="#" target="_blank" rel="noopener">Instagram</a><a data-social="facebook" href="#" target="_blank" rel="noopener">Facebook</a><a data-social="tiktok" href="#" target="_blank" rel="noopener">TikTok</a></div>
+<div class="copy">© 2026 GutiMotos. Todos los derechos reservados.</div></div></footer>
+
+<dialog id="modal" aria-labelledby="mT"><button class="x" data-close aria-label="Cerrar">×</button><div id="mBody"></div></dialog>
+<dialog id="cart" class="drawer" aria-labelledby="cT"><header><h2 id="cT">Tu pedido</h2><button class="x" data-close aria-label="Cerrar carrito">×</button></header>
+<div class="ship" id="ship"><span id="shipTxt"></span><i><u id="shipBar"></u></i></div>
+<ul id="items"></ul>
+<div class="sum"><span>Subtotal</span><span id="sub">$0</span></div><div class="sum t"><span>Total</span><span id="total">$0</span></div><small>Envío y disponibilidad se confirman por WhatsApp.</small>
+<div class="row"><button class="btn" id="wa">Pedir por WhatsApp</button><button class="btn alt" id="clear">Vaciar</button></div></dialog>
+<div class="fab"><button class="topbtn" id="top" hidden aria-label="Volver arriba">↑</button><a class="wafab" data-wa href="#" target="_blank" rel="noopener">WhatsApp</a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><p style="padding:20px;text-align:center">Activa JavaScript para ver el catálogo y usar el carrito.</p></noscript>
+<script defer src="js/config.js"></script><script defer src="js/products.js"></script><script defer src="js/app.js"></script>
+</body></html>
